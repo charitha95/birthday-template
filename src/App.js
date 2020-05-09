@@ -2,12 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.scss';
 import Zoom from 'react-reveal/Zoom';
 import Jello from 'react-reveal/Jello';
+import Rotate from 'react-reveal/Rotate';
+import Jump from 'react-reveal/Jump';
+import note_1 from './assets/1.png';
+import note_2 from './assets/2.png';
+import note_3 from './assets/3.png';
+import note_4 from './assets/4.png';
+import note_5 from './assets/5.png';
+import note_6 from './assets/6.png';
+import note_7 from './assets/7.png';
+
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function App() {
-  const [buttonName, setButtonName] = useState('Hap')
-  const [count, setCount] = useState(0)
-  // create web audio api context
+  const [buttonName, setButtonName] = useState('Hap');
+  const [count, setCount] = useState(0);
 
   const hbd = [
     264, 264, 297, 264, 352, 330,
@@ -57,7 +66,6 @@ function App() {
     }
   }, [count, hbd, playNote, words])
 
-
   const handerClick = () => {
     if (count >= hbd.length) {
       console.log('restting', count)
@@ -97,6 +105,7 @@ function App() {
         <div className="after"></div>
       </div>
 
+
       <Zoom>
         <h1>Wishing you a very </h1>
       </Zoom>
@@ -113,6 +122,43 @@ function App() {
         <div class="cake"></div>
         <div class="plate"></div>
       </section>
+
+      <div className='notes-wrapper'>
+        <Rotate top left>
+          <img src={note_1} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Rotate top right>
+          <img src={note_2} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Rotate top left >
+          <img src={note_3} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Rotate top right>
+          <img src={note_4} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Rotate top left >
+          <img src={note_5} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Rotate top right>
+          <img src={note_6} alt='note' />
+        </Rotate>
+      </div>
+      <div className='notes-wrapper'>
+        <Jump>
+          <img src={note_7} alt='note' />
+        </Jump>
+      </div>
+
 
       <div>
         <Jello delay={200}>
