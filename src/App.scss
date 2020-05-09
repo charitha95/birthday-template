@@ -1,0 +1,446 @@
+@import url("https://fonts.googleapis.com/css?family=Concert+One|Pacifico");
+
+h1,
+h2 {
+  display: none;
+}
+
+h1,
+h2 {
+  display: block;
+}
+$colors: #ef8d22, #feff28, #2bd8ff, #fc85e1;
+$particles: 50;
+$width: 500;
+$height: 500;
+
+// Create the explosion...
+$box-shadow: ();
+$box-shadow2: ();
+@for $i from 0 through $particles {
+  $box-shadow: $box-shadow,
+    random($width)-$width /
+      2 +
+      px
+      random($height)-$height /
+      1.2 +
+      px
+      hsl(random(360), 100, 50);
+  $box-shadow2: $box-shadow2, 0 0 #fff;
+}
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animationName} {
+    @content;
+  }
+
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+@mixin animation-delay($settings) {
+  -moz-animation-delay: $settings;
+  -webkit-animation-delay: $settings;
+  -o-animation-delay: $settings;
+  -ms-animation-delay: $settings;
+  animation-delay: $settings;
+}
+
+@mixin animation-duration($settings) {
+  -moz-animation-duration: $settings;
+  -webkit-animation-duration: $settings;
+  -o-animation-duration: $settings;
+  -ms-animation-duration: $settings;
+  animation-duration: $settings;
+}
+
+@mixin animation($settings) {
+  -moz-animation: $settings;
+  -webkit-animation: $settings;
+  -o-animation: $settings;
+  -ms-animation: $settings;
+  animation: $settings;
+}
+
+@mixin transform($settings) {
+  transform: $settings;
+  -moz-transform: $settings;
+  -webkit-transform: $settings;
+  -o-transform: $settings;
+  -ms-transform: $settings;
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    #e2b8f7,
+    #d4bafa,
+    #c7bcfb,
+    #b9befb,
+    #acbff9
+  );
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  font-family: "Pacifico", cursive;
+}
+
+h1 {
+  text-align: center;
+  top: 120px;
+  padding: 10px;
+  font-size: 75px;
+  background: -webkit-linear-gradient(
+    0deg,
+    rgb(228, 104, 240) 0%,
+    rgb(27, 178, 238) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Concert One", cursive;
+  font-weight: 400;
+  z-index: -1;
+  letter-spacing: 6px;
+}
+
+h2 {
+  text-align: center;
+  top: 50px;
+  font-size: 75px;
+  padding: 10px;
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(233, 230, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bokeh {
+  position: fixed;
+  width: 2vmin;
+  height: 2vmin;
+  border-radius: 50%;
+  animation-name: explosion;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+  animation-timing-function: cubic-bezier(0.84, 0.02, 1, 1);
+  @for $i from 1 through 100 {
+    &:nth-child(#{$i}) {
+      $color: ceil(random() * 4);
+      background-color: nth($colors, $color);
+      $x: random() * 100vw;
+      $y: random() * 100vh;
+      transform: translate($x, $y);
+      animation-duration: random() * 3s + 2s;
+      animation-delay: random() * -5s;
+    }
+  }
+}
+@keyframes explosion {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(50vw, 100vh);
+  }
+}
+
+.cake-wrapper {
+  position: relative;
+  top: -120px;
+}
+.cake {
+  position: relative;
+  // top: -175px;
+  margin: auto;
+  width: 200px;
+  height: 60px;
+  background: #f9fdff;
+  border-radius: 100%;
+  transform: translateZ(100px);
+
+  box-shadow: 0px 4px 0px #f4f9fd, 0px 8px 0px #dba9ff, 0px 12px 0px #fec3b3,
+    0px 16px 0px #f7f6fb, 0px 20px 0px #f7f6fb, 0px 24px 0px #f7f6fb,
+    0px 28px 0px #f7f6fb, 0px 32px 0px #fea0bb, 0px 36px 0px #fea0bb,
+    0px 40px 0px #9cef9d, 0px 44px 0px #9cef9d, 0px 48px 0px #f7f6fb,
+    0px 52px 0px #f7f6fb, 0px 56px 0px #f7f6fb, 0px 60px 0px #f7f6fb,
+    0px 64px 0px #f7f6fb, 0px 68px 0px #dfa5fc, 0px 72px 0px #dfa5fc,
+    0px 76px 0px #fafffe, 0px 80px 0px #fafffe;
+}
+
+.plate {
+  position: relative;
+  height: 90px;
+  max-width: 300px;
+  // bottom:-95px;
+  // left: 50%;
+  top: 20px;
+  // margin-left: -150px;
+  border-radius: 100%;
+  background: radial-gradient(
+    ellipse closest-side at center,
+    rgba(8, 199, 254, 1) 0%,
+    rgba(4, 215, 242, 1) 71%,
+    rgba(2, 255, 208, 1) 100%
+  );
+  box-shadow: 0px 3px 0px #00e2e1, 0px 6px 0px #00d3fb;
+  transform: translateZ(80px);
+  margin: auto;
+}
+
+.candle {
+  position: relative;
+  height: 50px;
+  width: 12px;
+  top: 20px;
+  z-index: 10;
+  margin: auto;
+  background: linear-gradient(
+    0deg,
+    rgba(183, 244, 167, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-radius: 4px;
+  transform: translateZ(120px);
+}
+
+#flame {
+  position: absolute;
+  z-index: 10;
+}
+
+.lit {
+  background: linear-gradient(to bottom, #fff6d9, #fbc36c);
+  width: 15px;
+  height: 35px;
+
+  /*  Info on border radius. http://www.css3.info/preview/rounded-border/ */
+
+  border-top-left-radius: 10px 35px;
+  border-top-right-radius: 10px 35px;
+  border-bottom-right-radius: 10px 10px;
+  border-bottom-left-radius: 10px 10px;
+  top: -34px;
+  margin: auto;
+
+  /*   http://www.css3.info/preview/box-shadow/ */
+  box-shadow: 0 0 17px 7px rgba(251, 246, 190, 0.71);
+  transform-origin: bottom;
+  animation: flicker 1s ease-in-out alternate infinite;
+}
+
+@keyframes flicker {
+  0% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 17px 10px rgba(251, 246, 190, 0.71);
+  }
+
+  25% {
+    transform: skewX(-5deg);
+    box-shadow: 0 0 17px 5px rgba(251, 246, 190, 0.71);
+  }
+
+  50% {
+    transform: skewX(10deg);
+    box-shadow: 0 0 17px 7px rgba(251, 246, 190, 0.71);
+  }
+
+  75% {
+    transform: skewX(-10deg);
+    box-shadow: 0 0 17px 5px rgba(251, 246, 190, 0.71);
+  }
+
+  100% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 17px 10px rgba(251, 246, 190, 0.71);
+  }
+}
+
+.pyro > .before,
+.pyro > .after {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  box-shadow: $box-shadow2;
+  @include animation(
+    (
+      1s bang ease-out infinite backwards,
+      1s gravity ease-in infinite backwards,
+      5s position linear infinite backwards
+    )
+  );
+}
+
+.pyro > .after {
+  @include animation-delay((1.25s, 1.25s, 1.25s));
+  @include animation-duration((1.25s, 1.25s, 6.25s));
+}
+
+@include keyframes(bang) {
+  to {
+    box-shadow: $box-shadow;
+  }
+}
+
+@include keyframes(gravity) {
+  to {
+    @include transform(translateY(200px));
+    opacity: 0;
+  }
+}
+
+@include keyframes(position) {
+  0%,
+  19.9% {
+    margin-top: 10%;
+    margin-left: 40%;
+  }
+  20%,
+  39.9% {
+    margin-top: 40%;
+    margin-left: 30%;
+  }
+  40%,
+  59.9% {
+    margin-top: 20%;
+    margin-left: 70%;
+  }
+  60%,
+  79.9% {
+    margin-top: 30%;
+    margin-left: 20%;
+  }
+  80%,
+  99.9% {
+    margin-top: 30%;
+    margin-left: 80%;
+  }
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 300px;
+}
+.animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+}
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+$height: 65;
+$depth: 6;
+$color: #dd60d7;
+$text-color: darken($color, 10%);
+$lighten-on-hover: 7%;
+$button-speed: 0.06;
+$timing-function: ease-out;
+
+.button {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  text-shadow: 0 -2px 0 darken($color, 20%), 0 1px 1px lighten($color, 20%);
+  box-sizing: border-box;
+  font-size: 2em;
+  font-family: Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  font-weight: bold;
+  color: $text-color;
+
+  height: $height + px;
+  line-height: $height + px;
+  padding: 0 (($height/2) + px);
+  display: inline-block;
+  min-width: 250px;
+  background: linear-gradient(
+    to bottom,
+    saturate(lighten($color, 15%), 35%) 0%,
+    saturate(lighten($color, 12%), 15%) 26%,
+    $color 100%
+  );
+  border-radius: 5px;
+  border: 1px solid lighten($color, 22%);
+  top: 0;
+  transition: all ($button-speed + s) $timing-function;
+  position: relative;
+  &:visited {
+    color: $text-color;
+  }
+}
+.button:hover {
+  background: linear-gradient(
+    to bottom,
+    lighten(saturate(lighten($color, 15%), 35%), $lighten-on-hover) 0%,
+    lighten(saturate(lighten($color, 12%), 15%), $lighten-on-hover) 26%,
+    lighten($color, $lighten-on-hover) 100%
+  );
+}
+.button:active {
+  top: $depth + px;
+  text-shadow: 0 -2px 0 darken($color, 0%), 0 1px 1px lighten($color, 20%),
+    0 0 4px white;
+  color: lighten($color, 45%);
+  &:before {
+    top: 0;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2);
+  }
+}
+.button:before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  top: ($depth) + px;
+  border-radius: 5px;
+  height: ($height) + px;
+  background: linear-gradient(
+    to top,
+    saturate(darken($color, 40%), 15%) 0%,
+    saturate(darken($color, 25%), 10%) $depth + px
+  );
+  transition: all (($button-speed * 1.3) + s) $timing-function;
+  box-shadow: 0 1px 0 2px rgba(0, 0, 0, 0.3),
+    0 5px ($depth * 0.4 + px) rgba(0, 0, 0, 0.5),
+    0 ($depth * 1.8 + px) 9px rgba(0, 0, 0, 0.2);
+}
